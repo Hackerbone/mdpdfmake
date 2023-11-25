@@ -12,7 +12,7 @@ export const pdfMakeParagraph = async (
 
     for (const childToken of token.tokens) {
       switch (childToken.type) {
-        case "image":
+        case "image": {
           // If there are inline elements before the image, push them as a paragraph
           if (inlineElements.length > 0) {
             content.push({
@@ -26,23 +26,26 @@ export const pdfMakeParagraph = async (
           const imageFragment = await pdfMakeImage(childToken, [], false);
           content.push(imageFragment);
           break;
+        }
         case "strong":
         case "em":
         case "codespan":
         case "del":
         case "link":
-        case "code":
+        case "code": {
           // delete tokens array from childToken
           const fixedChildTokens: any = childToken;
           delete fixedChildTokens.tokens;
           const textRecContent = await pdfMakeText(fixedChildTokens, [], false);
           inlineElements.push(...textRecContent);
           break;
-        case "text":
+        }
+        case "text": {
           // delete tokens array from childToken
           const textRecContentText = await pdfMakeText(childToken, [], false);
           inlineElements.push(...textRecContentText);
           break;
+        }
         default:
           console.warn(`Unhandled token type: ${childToken.type}`);
           inlineElements.push({ text: childToken.raw });

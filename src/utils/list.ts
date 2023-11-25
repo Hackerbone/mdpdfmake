@@ -1,5 +1,5 @@
 import { Tokens } from "Tokens";
-import { pdfMakeText, getStyle } from "./text";
+import { pdfMakeText } from "./text";
 
 export const pdfMakeList = async (
   token: Tokens.List | Tokens.Generic,

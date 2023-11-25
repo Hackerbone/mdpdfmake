@@ -21,7 +21,7 @@ export const pdfMakeBlockquote = async (
       | Tokens.Generic
   ) => {
     switch (nestedToken.type) {
-      case "paragraph":
+      case "paragraph": {
         const pcontent = await pdfMakeParagraph(nestedToken, [], false);
 
         content.push({
@@ -31,16 +31,18 @@ export const pdfMakeBlockquote = async (
           background: "#e0e0e0", // a light gray highlight
         });
         break;
+      }
       case "strong":
       case "em":
       case "codespan":
       case "del":
       case "link":
       case "text":
-      case "code":
+      case "code": {
         const textRecContent = await pdfMakeText(nestedToken, [], false);
         blockquoteContent.push(...textRecContent);
         break;
+      }
       default:
         blockquoteContent.push({ text: nestedToken.text });
     }

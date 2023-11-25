@@ -1,27 +1,47 @@
 {
   "name": "mdpdfmake",
   "version": "1.0.0",
-  "description": "Convert Markdown text into PDFMake Syntax",
+  "description": "A Node.js library to convert Markdown to PDFMake Syntax",
   "main": "dist/index.js",
-  "scripts": {
-    "start": "tsc && node dist/index.js",
-    "lint": "eslint . --ext .ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hackerbone/mdpdfmake.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "markdown",
+    "pdf",
+    "pdfmake",
+    "document",
+    "converter"
+  ],
+  "author": "Sitaraman S",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
   "devDependencies": {
-    "@types/xmlhttprequest": "^1.8.0",
+    "@types/pdfmake": "^0.2.8",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
     "eslint": "^8.51.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@types/image-to-base64": "^2.1.0",
-    "@types/pdfmake": "^0.2.5",
     "axios": "^1.5.1",
     "image-to-base64": "^2.2.0",
     "marked": "^9.1.2",
-    "pdfmake": "^0.2.7",
-    "xmlhttprequest": "^1.8.0"
+    "pdfmake": "^0.2.8"
+  },
+  "bugs": {
+    "url": "https://github.com/hackerbone/mdpdfmake/issues"
+  },
+  "homepage": "https://github.com/hackerbone/mdpdfmake#readme",
+  "engines": {
+    "node": ">=12.0.0"
   }
 }

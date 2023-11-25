@@ -17,7 +17,7 @@ export const pdfMakeText = async (
         case "codespan":
         case "del":
         case "link":
-        case "code":
+        case "code": {
           fragment = {
             text: childToken.text,
             ...getStyle(childToken.type),
@@ -29,10 +29,12 @@ export const pdfMakeText = async (
 
           textFragments.push(fragment);
           break;
-        case "text":
+        }
+        case "text": {
           const textRecContent = await pdfMakeText(childToken, [], false);
           textFragments.push(...textRecContent.map((f: any) => f.text)); // Flatten the text fragments
           break;
+        }
         default:
           console.warn(`Unhandled token type: ${childToken.type}`);
           fragment = { text: childToken.raw };
