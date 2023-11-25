@@ -1,4 +1,5 @@
 import { Tokens } from "Tokens";
+import { pdfMakeCodeblock } from "./codeblock";
 
 export const pdfMakeText = async (
   token: Tokens.Text | Tokens.Generic,
@@ -16,8 +17,7 @@ export const pdfMakeText = async (
         case "em":
         case "codespan":
         case "del":
-        case "link":
-        case "code": {
+        case "link": {
           fragment = {
             text: childToken.text,
             ...getStyle(childToken.type),
@@ -28,6 +28,11 @@ export const pdfMakeText = async (
           }
 
           textFragments.push(fragment);
+          break;
+        }
+        case "code": {
+          const codeContent = await pdfMakeCodeblock(childToken, [], false);
+          textFragments.push(codeContent);
           break;
         }
         case "text": {
@@ -58,7 +63,6 @@ export const pdfMakeText = async (
       case "codespan":
       case "del":
       case "link":
-      case "code":
         fragment = {
           text: token.text,
           ...getStyle(token.type),
@@ -74,6 +78,11 @@ export const pdfMakeText = async (
         fragment = { text: token.raw };
         textFragments.push(fragment);
         break;
+      case "code": {
+        const codeContent = await pdfMakeCodeblock(token, [], false);
+        textFragments.push(codeContent);
+        break;
+      }
       default:
         console.warn(`Unhandled token type: ${token.type}`);
         fragment = { text: token.raw };
@@ -104,9 +113,10 @@ export function getStyle(type: string) {
       return { color: "blue", decoration: "underline" };
     case "code":
       return {
-        background: "#f0f0f0",
-        fontSize: 10,
-        margin: [0, 5, 0, 5],
+        fontSize: 10, // Smaller font size for code
+        color: "#333333", // Darker text color
+        preserveLeadingSpaces: true, // Preserve indentation
+        lineHeight: 1.2, // Adjust line height for better readability
       };
     default:
       return {};

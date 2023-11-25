@@ -54,9 +54,8 @@ mdpdfmake(markdown).then(docDefinition => {
 
 
 ### Upcoming Features
-- `Codeblocks Support`: Add support for converting Markdown codeblocks into formatted text in the PDF.
 - `Table Support`: Add support for converting Markdown tables into tables in the PDF.
-- `Nested Lists`: Improve support for nested lists in the Markdown to PDF conversion.
+
 
 
 ### Contributing

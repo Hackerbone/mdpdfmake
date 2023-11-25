@@ -10,6 +10,8 @@ import { pdfMakeParagraph } from "./utils/paragraph";
 import { pdfMakeHeading } from "./utils/heading";
 import { pdfMakeList } from "./utils/list";
 import { pdfMakeBlockquote } from "./utils/blockquote";
+import { pdfMakeCodeblock } from "./utils/codeblock";
+import { pdfMakeHR } from "./utils/hr";
 
 async function mdpdfmake(markdown: string): Promise<TDocumentDefinitions> {
   const tokens = lexer(markdown);
@@ -35,6 +37,14 @@ async function mdpdfmake(markdown: string): Promise<TDocumentDefinitions> {
 
       case "image":
         await pdfMakeImage(token, content);
+        break;
+
+      case "code":
+        await pdfMakeCodeblock(token, content);
+        break;
+
+      case "hr":
+        await pdfMakeHR(token, content);
         break;
 
       case "space":

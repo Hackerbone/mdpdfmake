@@ -1,6 +1,7 @@
 import { Tokens } from "Tokens";
 import { pdfMakeParagraph } from "./paragraph";
 import { pdfMakeText } from "./text";
+import { pdfMakeCodeblock } from "./codeblock";
 
 export const pdfMakeBlockquote = async (
   token: Tokens.Blockquote | Tokens.Generic,
@@ -28,7 +29,7 @@ export const pdfMakeBlockquote = async (
           ...pcontent,
           italics: true,
           margin: [0, 5, 0, 5],
-          background: "#e0e0e0", // a light gray highlight
+          background: "#eae7f2", // a light purple highlight
         });
         break;
       }
@@ -37,10 +38,14 @@ export const pdfMakeBlockquote = async (
       case "codespan":
       case "del":
       case "link":
-      case "text":
-      case "code": {
+      case "text": {
         const textRecContent = await pdfMakeText(nestedToken, [], false);
         blockquoteContent.push(...textRecContent);
+        break;
+      }
+      case "code": {
+        const codeContent = await pdfMakeCodeblock(nestedToken, [], false);
+        blockquoteContent.push(codeContent);
         break;
       }
       default:

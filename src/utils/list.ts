@@ -6,30 +6,40 @@ export const pdfMakeList = async (
   content: any[],
   push: boolean = true
 ) => {
-  const listContent: any[] = [];
-
-  for (const item of token.items) {
+  const processListItem = async (item) => {
     const itemContent = [];
 
-    // Process each token within the list item
     for (const childToken of item.tokens) {
-      const listContent = await pdfMakeText(childToken, itemContent, false);
-      itemContent.push(...listContent);
+      if (childToken.type === "list") {
+        // Handle sublists: Recursively process the nested list
+        const sublist = await pdfMakeList(childToken, [], false);
+        itemContent.push(sublist);
+      } else {
+        // Handle regular list items
+        const textContent = await pdfMakeText(childToken, [], false);
+        itemContent.push(...textContent);
+      }
     }
 
-    // Add formatted item content to the list
-    listContent.push(...(itemContent.length > 0 ? itemContent : [])); // Adjust margins as needed
-  }
-
-  // Define the list format based on whether the list is ordered or unordered
-  const listFormat = token.ordered ? "ol" : "ul";
-
-  const list = {
-    [listFormat]: listContent,
-    margin: [0, 5, 0, 5],
+    // Return the list item content
+    return { text: itemContent };
   };
 
-  // Add the formatted list to the content array if push is true
-  if (push) content.push(list);
-  return list;
+  const listContent = await Promise.all(
+    token.items.map(async (item) => processListItem(item))
+  );
+
+  // Define the list format
+  const listFormat = token.ordered ? "ol" : "ul";
+
+  const listStructure = {
+    [listFormat]: listContent.map((itemContent) => itemContent.text),
+    margin: [0, 5, 0, 5], // Margin for the entire list
+  };
+
+  if (push) {
+    content.push(listStructure);
+  }
+
+  return listStructure;
 };

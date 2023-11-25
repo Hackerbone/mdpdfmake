@@ -1,6 +1,7 @@
 import { Tokens } from "Tokens";
 import { pdfMakeImage } from "./image";
 import { pdfMakeText } from "./text";
+import { pdfMakeCodeblock } from "./codeblock";
 
 export const pdfMakeParagraph = async (
   token: Tokens.Paragraph | Tokens.Generic,
@@ -31,13 +32,17 @@ export const pdfMakeParagraph = async (
         case "em":
         case "codespan":
         case "del":
-        case "link":
-        case "code": {
+        case "link": {
           // delete tokens array from childToken
           const fixedChildTokens: any = childToken;
           delete fixedChildTokens.tokens;
           const textRecContent = await pdfMakeText(fixedChildTokens, [], false);
           inlineElements.push(...textRecContent);
+          break;
+        }
+        case "code": {
+          const codeContent = await pdfMakeCodeblock(childToken, [], false);
+          inlineElements.push(codeContent);
           break;
         }
         case "text": {
