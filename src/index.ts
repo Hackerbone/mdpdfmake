@@ -53,4 +53,4 @@ async function mdpdfmake(markdown: string): Promise<TDocumentDefinitions> {
   };
 }
 
-export default mdpdfmake;
+export { mdpdfmake };
