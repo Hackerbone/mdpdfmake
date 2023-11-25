@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "A Node.js library to convert Markdown to PDFMake Syntax",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hackerbone/mdpdfmake.git"
