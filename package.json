@@ -1,0 +1,27 @@
+{
+  "name": "mdpdfmake",
+  "version": "1.0.0",
+  "description": "Convert Markdown text into PDFMake Syntax",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/xmlhttprequest": "^1.8.0",
+    "eslint": "^8.51.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/image-to-base64": "^2.1.0",
+    "@types/pdfmake": "^0.2.5",
+    "axios": "^1.5.1",
+    "image-to-base64": "^2.2.0",
+    "marked": "^9.1.2",
+    "pdfmake": "^0.2.7",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

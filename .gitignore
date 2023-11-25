@@ -1,0 +1,5 @@
+pdf-*
+dist
+node_modules
+testing
+fonts
