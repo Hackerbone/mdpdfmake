@@ -20,15 +20,7 @@ Nested Lists: Improve support for nested lists in the Markdown to PDF conversion
 ### Usage
 To use this converter, simply import the module and call the convert function with your Markdown text as the argument. The function will return a PDFMake document definition that you can use to create your PDF.
 
-```ts
-const converter = require('markdown-to-pdfmake');
-const pdfMake = require('pdfmake');
-
-let markdownText = '# Hello, world!';
-let docDefinition = converter.convert(markdownText);
-
-pdfMake.createPdf(docDefinition).download();
-```
+WIP
 
 ### Contributing
 Contributions to this project are welcome! If you're interested in adding a feature or fixing a bug, please open a new issue or pull request.
