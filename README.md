@@ -61,3 +61,7 @@ mdpdfmake(markdown).then(docDefinition => {
 
 ### Contributing
 Contributions to this project are welcome! If you're interested in adding a feature or fixing a bug, please open a new issue or pull request.
+
+
+### License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
