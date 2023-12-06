@@ -24,7 +24,7 @@ npm install mdpdfmake
 To use this converter, simply import the module and call the convert function with your Markdown text as the argument. The function will return a PDFMake document definition that you can use to create your PDF.
 
 ```ts
-import mdpdfmake from 'mdpdfmake';
+import { mdpdfmake } from 'mdpdfmake';
 
 const markdown = `# Heading
 This is a paragraph with **bold** text and *italic* text.
