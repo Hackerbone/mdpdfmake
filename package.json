@@ -1,6 +1,6 @@
 {
   "name": "mdpdfmake",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Node.js library to convert Markdown to PDFMake Syntax",
   "main": "dist/index.js",
   "types": "src/index.d.ts",
