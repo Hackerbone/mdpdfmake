@@ -28,7 +28,7 @@ To use this converter, simply import the module and call the convert function wi
 ```ts
 import { mdpdfmake } from "mdpdfmake";
 
-const MOptions = {
+const options = {
   headingFontSizes: [24, 22, 20],
   headingUnderline: true,
 };
@@ -43,7 +43,7 @@ This is a paragraph with **bold** text and *italic* text.
 
 ![Image](https://cdn.pixabay.com/photo/2018/01/23/23/53/rick-and-morty-3102795_1280.jpg)`;
 
-mdpdfmake(markdown).then((docDefinition) => {
+mdpdfmake(markdown, options).then((docDefinition) => {
   // Use docDefinition with a PDFMake instance to generate a PDF
 });
 ```
@@ -52,11 +52,11 @@ mdpdfmake(markdown).then((docDefinition) => {
 
 ### API Reference
 
-`mdpdfmake(markdown: string): Promise<TDocumentDefinitions>` - Converts the given Markdown string into a PDFMake document definition.
+`mdpdfmake(markdown: string, options?: MOptions): Promise<TDocumentDefinitions>` - Converts the given Markdown string into a PDFMake document definition.
 
 #### Parameters:
 
-- `markdown` (string, options?): The Markdown content to convert.
+- `markdown` (string, options?): Converts the given Markdown string into a PDFMake document definition.
 
 #### Options
 
