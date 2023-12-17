@@ -13,7 +13,7 @@ import { pdfMakeBlockquote } from "./utils/blockquote";
 import { pdfMakeCodeblock } from "./utils/codeblock";
 import { pdfMakeHR } from "./utils/hr";
 
-export interface MOptions {
+interface MOptions {
   headingFontSizes: number[];
   headingUnderline?: boolean;
 }
