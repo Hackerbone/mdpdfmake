@@ -39,7 +39,6 @@ async function mdpdfmake(
     globalOptions.headingUnderline = options.headingUnderline;
   }
 
-  console.log(globalOptions);
   // Tokenize markdown
   const tokens = lexer(markdown);
   const content: any[] = [];
