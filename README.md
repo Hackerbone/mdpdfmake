@@ -1,10 +1,11 @@
 # mdpdfmake (Convert Markdown to pdfmake easily)
 
-Finding a converter that can convert Markdown to PDFMake can be difficult. This package aims to solve that problem by providing a simple function that takes Markdown input (string) and converts it into a format that can be used with the PDFMake library. 
+Finding a converter that can convert Markdown to PDFMake can be difficult. This package aims to solve that problem by providing a simple function that takes Markdown input (string) and converts it into a format that can be used with the PDFMake library.
 
 This allows you to easily create PDF documents from your Markdown files.
 
 ### Features
+
 - `Headers`: Supports all levels of Markdown headers.
 - `Lists`: Supports both ordered and unordered lists.
 - `Links`: Converts Markdown links into clickable links in the PDF.
@@ -21,10 +22,16 @@ npm install mdpdfmake
 ```
 
 ### Usage
+
 To use this converter, simply import the module and call the convert function with your Markdown text as the argument. The function will return a PDFMake document definition that you can use to create your PDF.
 
 ```ts
-import { mdpdfmake } from 'mdpdfmake';
+import { mdpdfmake } from "mdpdfmake";
+
+const MOptions = {
+  headingFontSizes: [24, 22, 20],
+  headingUnderline: true,
+};
 
 const markdown = `# Heading
 This is a paragraph with **bold** text and *italic* text.
@@ -36,13 +43,12 @@ This is a paragraph with **bold** text and *italic* text.
 
 ![Image](https://cdn.pixabay.com/photo/2018/01/23/23/53/rick-and-morty-3102795_1280.jpg)`;
 
-mdpdfmake(markdown).then(docDefinition => {
-    // Use docDefinition with a PDFMake instance to generate a PDF
+mdpdfmake(markdown).then((docDefinition) => {
+  // Use docDefinition with a PDFMake instance to generate a PDF
 });
 ```
 
 > Note: The response from the convert function is a Promise, so you will need to use async/await or .then() to get the result.
-
 
 ### API Reference
 
@@ -50,17 +56,23 @@ mdpdfmake(markdown).then(docDefinition => {
 
 #### Parameters:
 
-- `markdown` (string): The Markdown content to convert.
+- `markdown` (string, options?): The Markdown content to convert.
 
+#### Options
+
+| Option             | Type     | Description                                                                                                          | Default                    |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `headingFontSizes` | number[] | An array of font sizes (in px) to use for each level of Markdown header. The first element is for h1 through h6 etc. | `[36, 30, 24, 18, 15, 12]` |
+| `headingUnderline` | boolean  | Whether or not to underline Markdown headers.                                                                        | `true`                     |
 
 ### Upcoming Features
+
 - `Table Support`: Add support for converting Markdown tables into tables in the PDF.
 
-
-
 ### Contributing
+
 Contributions to this project are welcome! If you're interested in adding a feature or fixing a bug, please open a new issue or pull request.
 
-
 ### License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.

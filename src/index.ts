@@ -13,7 +13,34 @@ import { pdfMakeBlockquote } from "./utils/blockquote";
 import { pdfMakeCodeblock } from "./utils/codeblock";
 import { pdfMakeHR } from "./utils/hr";
 
-async function mdpdfmake(markdown: string): Promise<TDocumentDefinitions> {
+interface MOptions {
+  headingFontSizes: number[];
+  headingUnderline?: boolean;
+}
+
+export const globalOptions: MOptions = {
+  headingFontSizes: [36, 30, 24, 18, 15, 12],
+  headingUnderline: true,
+};
+
+async function mdpdfmake(
+  markdown: string,
+  options?: MOptions
+): Promise<TDocumentDefinitions> {
+  // Set default options
+  if (options.headingFontSizes) {
+    // override only added values
+    options.headingFontSizes.forEach((size, index) => {
+      globalOptions.headingFontSizes[index] = size;
+    });
+  }
+
+  if (options.headingUnderline !== undefined) {
+    globalOptions.headingUnderline = options.headingUnderline;
+  }
+
+  console.log(globalOptions);
+  // Tokenize markdown
   const tokens = lexer(markdown);
   const content: any[] = [];
 
