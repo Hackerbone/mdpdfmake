@@ -28,14 +28,14 @@ async function mdpdfmake(
   options?: MOptions
 ): Promise<TDocumentDefinitions> {
   // Set default options
-  if (options.headingFontSizes) {
+  if (options?.headingFontSizes?.length > 0) {
     // override only added values
     options.headingFontSizes.forEach((size, index) => {
       globalOptions.headingFontSizes[index] = size;
     });
   }
 
-  if (options.headingUnderline !== undefined) {
+  if (options?.headingUnderline !== undefined) {
     globalOptions.headingUnderline = options.headingUnderline;
   }
 
@@ -74,6 +74,10 @@ async function mdpdfmake(
         break;
 
       case "space":
+        break;
+
+      case "br":
+        content.push({ text: "\n" });
         break;
 
       default:
