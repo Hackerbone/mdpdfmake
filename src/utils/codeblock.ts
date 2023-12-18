@@ -9,11 +9,15 @@ export const pdfMakeCodeblock = async (
   // Define the style for the code text
   const codeTextStyle = getStyle("code");
 
-  // Add the code text to a paragraph with the specified background color
   const codeText = {
-    text: token.text,
-    ...codeTextStyle,
-    margin: [5, 5, 5, 5], // Adjust margin as needed
+    columns: [
+      {
+        width: "90%",
+        text: token.text,
+        ...codeTextStyle,
+        margin: [5, 5, 5, 5], // Adjust margin as needed
+      },
+    ],
   };
 
   // Highlight the language name (if available)
@@ -34,6 +38,7 @@ export const pdfMakeCodeblock = async (
       languageHeader,
       {
         table: {
+          widths: ["*"], // Ensure the table uses the full available width
           body: [[codeText]],
         },
         layout: {

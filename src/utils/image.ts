@@ -1,4 +1,5 @@
 import { Tokens } from "Tokens";
+import axios from "axios";
 import imageToBase64 from "image-to-base64";
 
 export const pdfMakeImage = async (
@@ -7,6 +8,7 @@ export const pdfMakeImage = async (
   push: boolean = true
 ) => {
   try {
+    await axios.head(token.href);
     const base64Image = await imageToBase64(token.href);
 
     // get extension from href
@@ -27,7 +29,7 @@ export const pdfMakeImage = async (
 
     return { image: dataUrl, width: 150, margin: [0, 5, 0, 5] };
   } catch (err) {
-    console.warn(err);
+    console.warn("Image not found: " + token.href, ", reverting to text.");
     return {
       text: `[Image: ${token.href}]`,
       link: token.href,

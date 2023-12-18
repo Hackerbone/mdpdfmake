@@ -40,6 +40,9 @@ export const pdfMakeText = async (
           textFragments.push(...textRecContent.map((f: any) => f.text)); // Flatten the text fragments
           break;
         }
+        case "br":
+          textFragments.push("\n");
+          break;
         default:
           console.warn(`Unhandled token type: ${childToken.type}`);
           fragment = { text: childToken.raw };
